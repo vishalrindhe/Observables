@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div *ngIf="allData |async as data">
+    <div *ngFor="let variable of data.myObservable">
+        {{variable | json}}
+    </div>
+    
+    <div *ngIf="data.userName as user">
+        {{user?.name}}
+    </div>
+</div>
