@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -7,23 +7,30 @@ import { Observable, observable } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
   myObeservable = new Observable(observable => {
-    console.log(observable);
     observable.next('1')
-    observable.next('2')
-    observable.next('3')
-    observable.next('4')
-    observable.next('5')
-    
+    // observable.error('error occured message')
+    observable.complete()
+    observable.next('1')
+    observable.error('error occured message')
   })
-  constructor() { }
+  // myObeservable = Observable.create((observable:any) => {
+  //   observable.next('1')
+  //   // observable.error('error occured message')
+  //   observable.complete()
+  //   observable.next('1')
+  //   observable.error('error occured message')
+  // })
+    
 
   ngOnInit(): void {
-    this.myObeservable.subscribe(next => {
+    this.myObeservable.subscribe((next:any) => {
       console.log(next);
-    }, error => {
-      console.log(error);
+    }, (error:any) => {
+      console.error(error);
+    }, () => {
+      console.log('completed');
+      
     }
     )
   }
